@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coffee Shop</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Welcome to Coffee Shop</h1>
+        <!-- Cart toggle button -->
+        <button id="cartToggleButton" onclick="toggleCart()">🛒 View Cart</button>
+    </header>
+    
+    <main>
+        <!-- Coffee menu sections remain unchanged -->
+            <section class="coffee-menu">
+                <h2>With Coffee</h2>
+                <div class="coffee-item">
+                    <img src="iced_caramel_macchiato.jpg" alt="Iced Caramel Macchiato">
+                    <h3>Iced Caramel Macchiato</h3>
+                    <p>₱59</p>
+                    <button onclick="addToCart('Iced Caramel Macchiato')">Add</button>
+                </div>
+                <div class="coffee-item">
+                    <img src="donya_berry_with_coffee.jpg" alt="Donya Berry With Coffee">
+                    <h3>Donya Berry With Coffee</h3>
+                    <p>₱59</p>
+                    <button onclick="addToCart('Donya Berry With Coffee')">Add</button>
+                </div>
+                <div class="coffee-item">
+                    <img src="don_matchatos_with_coffee.jpg" alt="Don Matchatos With Coffee">
+                    <h3>Don Matchatos With Coffee</h3>
+                    <p>₱59</p>
+                    <button onclick="addToCart('Don Matchatos With Coffee')">Add</button>
+                </div>
+                <div class="coffee-item">
+                    <img src="matcha_berry_with_coffee.jpg" alt="Matcha Berry With Coffee">
+                    <h3>Matcha Berry With Coffee</h3>
+                    <p>₱59</p>
+                    <button onclick="addToCart('Matcha Berry With Coffee')">Add</button>
+                </div>
+            </section>
+            
+            <section class="coffee-menu">
+                <h2>Without Coffee</h2>
+                <div class="coffee-item">
+                    <img src="don_matchatos.jpg" alt="Don Matchatos">
+                    <h3>Don Matchatos</h3>
+                    <p>₱59</p>
+                    <button onclick="addToCart('Don Matchatos')">Add</button>
+                </div>
+                <div class="coffee-item">
+                    <img src="donya_berry.jpg" alt="Donya Berry">
+                    <h3>Donya Berry</h3>
+                    <p>₱59</p>
+                    <button onclick="addToCart('Donya Berry')">Add</button>
+                </div>
+                <div class="coffee-item">
+                    <img src="don_darko.jpg" alt="Don Darko">
+                    <h3>Don Darko</h3>
+                    <p>₱59</p>
+                    <button onclick="addToCart('Don Darko')">Add</button>
+                </div>
+                <div class="coffee-item">
+                    <img src="oreo.jpg" alt="Oreo">
+                    <h3>Oreo</h3>
+                    <p>₱59</p>
+                    <button onclick="addToCart('Oreo')">Add</button>
+                </div>
+            </section>
+    
+            <section class="coffee-menu">
+                <h2>Meals</h2>
+                <div class="coffee-item">
+                    <img src="boneless_chicken_rm2.jpg" alt="Boneless Chicken Rice Meal RM2">
+                    <h3>Boneless Chicken Rice Meal RM2</h3>
+                    <p>₱95</p>
+                    <button onclick="openFlavorSelection('Boneless Chicken Rice Meal RM2', 95)">Add</button>
+                </div>
+                <div class="coffee-item">
+                    <img src="boneless_chicken_rm3.jpg" alt="Boneless Chicken Rice Meal RM3">
+                    <h3>Boneless Chicken Rice Meal RM3</h3>
+                    <p>₱130</p>
+                    <button onclick="openFlavorSelection('Boneless Chicken Rice Meal RM3', 130)">Add</button>
+                </div>
+            </section>
+            
+            <!-- Modal for flavor selection -->
+            <div id="flavorModal" class="modal">
+                <div class="modal-content">
+                    <h3 id="selectedItemName"></h3>
+                    <p>Select a flavor:</p>
+                    <ul id="flavorList">
+                        <!-- Flavors will be dynamically inserted here -->
+                    </ul>
+                    <button onclick="closeFlavorModal()">Cancel</button>
+                </div>
+            </div>
+
+        
+        <!-- Add the cart toggle button -->
+<button id="cartToggleButton" onclick="toggleCart()">🛒 View Cart</button>
+
+<!-- Cart panel (unchanged, but slides from the right now) -->
+<div id="cartPanel" class="cart-panel">
+    <h2>Shopping Cart</h2>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Item</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody id="cartItems">
+            <!-- Cart items will appear here -->
+        </tbody>
+    </table>
+
+    <div class="cart-summary">
+        <p id="cartTotal">Total (0 items): ₱0</p>
+        <button class="order-button" onclick="placeOrder()">Order</button>
+    </div>
+</div>
+
+    </main>
+    
+    <script src="script.js"></script>
+</body>
+
+</html>
