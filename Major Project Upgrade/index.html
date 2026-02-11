@@ -1,0 +1,171 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dino's Cave Crave | Premium Coffee & Chicken</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #f97316;
+            border-radius: 10px;
+        }
+        .drawer-closed { transform: translateX(100%); }
+        .drawer-open { transform: translateX(0); }
+        .modal-hidden { display: none; }
+        .modal-visible { display: flex; }
+        .active-filter { background: #ea580c !important; color: white !important; }
+    </style>
+<script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@^19.2.4",
+    "react/": "https://esm.sh/react@^19.2.4/"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+<body class="bg-[#fdf8f4] text-gray-900">
+    <!-- Navbar -->
+    <header class="sticky top-0 z-[1000] bg-white/70 backdrop-blur-xl border-b border-orange-100/50 px-6 py-4">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <div class="flex items-center gap-4">
+                <div class="w-12 h-12 bg-orange-600 rounded-2xl flex items-center justify-center text-white shadow-xl shadow-orange-200 -rotate-3 hover:rotate-0 transition-transform cursor-pointer">
+                    <i class="fas fa-dragon text-2xl"></i>
+                </div>
+                <div>
+                    <h1 class="text-2xl font-black tracking-tight leading-none italic uppercase">Cave Crave</h1>
+                    <div class="flex items-center gap-1.5 mt-1">
+                        <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+                        <p class="text-[10px] text-orange-600 uppercase font-black tracking-[0.2em]">Open & Cooking</p>
+                    </div>
+                </div>
+            </div>
+            <button id="cartBtn" class="relative rounded-2xl h-12 w-12 flex items-center justify-center bg-gray-900 text-white hover:bg-black transition-all active:scale-90">
+                <i class="fas fa-shopping-basket text-lg"></i>
+                <span id="cartBadge" class="hidden absolute -top-2 -right-2 bg-orange-600 text-white text-[10px] font-bold h-6 w-6 rounded-full flex items-center justify-center border-4 border-white">0</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="px-6 pt-8 pb-12">
+        <div class="max-w-7xl mx-auto">
+            <div class="bg-gradient-to-br from-orange-600 to-amber-500 rounded-[3rem] p-12 relative overflow-hidden shadow-2xl shadow-orange-200">
+                <div class="relative z-10">
+                    <span class="bg-white/20 backdrop-blur-md text-white px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest inline-flex items-center gap-2 mb-6">
+                        <i class="fas fa-fire-alt"></i> Dino's Recommendation
+                    </span>
+                    <h2 class="text-5xl sm:text-7xl font-black text-white mb-6 leading-[1.05] drop-shadow-sm">The Primal Taste.</h2>
+                    <p class="text-orange-50 text-xl mb-10 opacity-90 max-w-lg leading-relaxed font-medium">
+                        Satisfy your hunger with our signature Korean Boneless Chicken and Premium Iced Brews.
+                    </p>
+                    <button onclick="document.getElementById('menu').scrollIntoView({behavior:'smooth'})" class="bg-white text-gray-900 hover:bg-orange-50 rounded-[1.5rem] px-10 h-16 text-lg font-black shadow-xl transition-all active:scale-95">
+                        Start Your Order <i class="fas fa-arrow-down ml-3 text-orange-500"></i>
+                    </button>
+                </div>
+                <div class="absolute -bottom-20 -right-20 transform rotate-12 opacity-10 pointer-events-none">
+                   <i class="fas fa-drumstick-bite text-[400px] text-white"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Filter & Menu -->
+    <main id="menu" class="max-w-7xl mx-auto px-6">
+        <div class="flex flex-col sm:flex-row items-center justify-between mb-12 gap-8 border-b border-gray-100 pb-8">
+            <div class="text-center sm:text-left">
+                <h2 class="text-4xl font-black text-gray-900 tracking-tight">Crave The Menu</h2>
+                <p class="text-gray-500 font-medium mt-1 italic">Handcrafted with love in Dino's Cave</p>
+            </div>
+            <div class="flex bg-gray-100/80 p-1.5 rounded-2xl gap-1">
+                <button onclick="app.setFilter('all')" class="filter-btn active-filter px-6 py-3 rounded-[1.2rem] text-sm font-black uppercase tracking-wider transition-all">All Items</button>
+                <button onclick="app.setFilter('with-coffee')" class="filter-btn px-6 py-3 rounded-[1.2rem] text-sm font-black uppercase tracking-wider transition-all">With Coffee</button>
+                <button onclick="app.setFilter('no-coffee')" class="filter-btn px-6 py-3 rounded-[1.2rem] text-sm font-black uppercase tracking-wider transition-all">No Coffee</button>
+                <button onclick="app.setFilter('meal')" class="filter-btn px-6 py-3 rounded-[1.2rem] text-sm font-black uppercase tracking-wider transition-all">Meals</button>
+            </div>
+        </div>
+        <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-10">
+            <!-- Products injected by JS -->
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="mt-32 bg-gray-900 pt-20 pb-10 px-6 rounded-t-[4rem]">
+        <div class="max-w-7xl mx-auto text-center md:text-left">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-12 border-b border-gray-800 pb-20">
+                <div>
+                    <div class="flex items-center justify-center md:justify-start gap-4 mb-6">
+                        <div class="w-12 h-12 bg-orange-600 rounded-2xl flex items-center justify-center text-white">
+                            <i class="fas fa-dragon text-2xl"></i>
+                        </div>
+                        <h2 class="text-3xl font-black text-white italic uppercase">Cave Crave</h2>
+                    </div>
+                    <p class="text-gray-400 max-w-sm font-medium">Premium Korean flavors and cold brews delivered right from our cave to yours.</p>
+                </div>
+                <div class="flex gap-4">
+                    <div class="w-14 h-14 rounded-2xl bg-gray-800 flex items-center justify-center text-white text-xl cursor-pointer hover:bg-orange-600"><i class="fab fa-instagram"></i></div>
+                    <div class="w-14 h-14 rounded-2xl bg-gray-800 flex items-center justify-center text-white text-xl cursor-pointer hover:bg-orange-600"><i class="fab fa-facebook"></i></div>
+                </div>
+            </div>
+            <p class="text-gray-500 text-xs font-bold uppercase tracking-widest mt-10">© 2024 Dino's Cave Crave</p>
+        </div>
+    </footer>
+
+    <!-- Cart Drawer -->
+    <div id="cartBackdrop" class="fixed inset-0 bg-black/40 backdrop-blur-sm z-[1500] hidden"></div>
+    <div id="cartDrawer" class="fixed top-0 right-0 h-full w-full sm:w-[400px] bg-white shadow-2xl z-[1600] transition-transform duration-300 drawer-closed flex flex-col">
+        <div class="p-6 border-b flex items-center justify-between">
+            <h2 class="text-2xl font-bold">Your Order</h2>
+            <button onclick="app.closeCart()" class="w-10 h-10 rounded-full hover:bg-gray-100 transition-colors"><i class="fas fa-times"></i></button>
+        </div>
+        <div id="cartList" class="flex-grow overflow-y-auto p-6 custom-scrollbar space-y-4">
+            <!-- Cart items injected by JS -->
+        </div>
+        <div id="cartFooter" class="p-6 border-t space-y-4 bg-white hidden">
+            <div class="flex justify-between font-bold text-xl">
+                <span>Subtotal</span>
+                <span id="cartTotal">₱0</span>
+            </div>
+            <button onclick="app.checkout()" class="w-full bg-orange-600 text-white py-4 rounded-2xl font-black uppercase tracking-widest hover:bg-orange-700 transition-all active:scale-95 shadow-xl shadow-orange-100">Check Out</button>
+        </div>
+    </div>
+
+    <!-- Flavor Modal -->
+    <div id="flavorModal" class="fixed inset-0 z-[2000] hidden items-center justify-center p-4">
+        <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" onclick="app.closeFlavorModal()"></div>
+        <div class="relative bg-white w-full max-w-2xl rounded-[2.5rem] shadow-2xl overflow-hidden animate-in zoom-in-95 duration-200">
+            <div class="p-8 bg-orange-600 text-white flex justify-between items-center">
+                <div>
+                    <h2 class="text-2xl font-black uppercase tracking-tight">Customize Flavor</h2>
+                    <p id="flavorModalProduct" class="text-sm text-orange-100 opacity-90"></p>
+                </div>
+                <button onclick="app.closeFlavorModal()" class="w-10 h-10 rounded-full bg-white/20 hover:bg-white/30"><i class="fas fa-times"></i></button>
+            </div>
+            <div id="flavorGrid" class="p-8 grid grid-cols-2 sm:grid-cols-3 gap-3 max-h-[60vh] overflow-y-auto custom-scrollbar">
+                <!-- Flavors injected by JS -->
+            </div>
+            <div class="p-8 pt-4 flex justify-end">
+                <button onclick="app.closeFlavorModal()" class="px-8 py-3 text-gray-500 font-bold hover:text-gray-800 transition-colors">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="./index.tsx"></script>
+<script type="module" src="/index.tsx"></script>
+</body>
+</html>
